@@ -20,7 +20,7 @@ jobs:
             CLJSTYLE_VERSION: 0.17.642
           command: |
             wget https://github.com/greglook/cljstyle/releases/download/${CLJSTYLE_VERSION}/cljstyle_${CLJSTYLE_VERSION}_linux_amd64.zip
-            unzip cljstyle_${CLJSTYLE_VERSION}_linux.zip
+            unzip cljstyle_${CLJSTYLE_VERSION}_linux_amd64.zip
       - run:
           name: Check source formatting
           command: "./cljstyle check --stats style-stats.tsv"
