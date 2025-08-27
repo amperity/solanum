@@ -32,7 +32,7 @@
     :source-paths ["dev"]
     :jvm-opts ["-DSOLANUM_LOG_APPENDER=repl"]
     :dependencies
-    [[org.clojure/tools.namespace "1.1.0"]]}
+    [[org.clojure/tools.namespace "1.5.0"]]}
 
    :test
    {:jvm-opts ["-DSOLANUM_LOG_APPENDER=nop"]}
