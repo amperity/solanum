@@ -40,13 +40,13 @@
    :coverage
    {:jvm-opts ["-DSOLANUM_LOG_APPENDER=nop"]
     :plugins
-    [[org.clojure/clojure "1.10.3"]
-     [lein-cloverage "1.1.2"]]}
+    [[org.clojure/clojure "1.12.2"]
+     [lein-cloverage "1.2.2"]]}
 
    :svm
    {:java-source-paths ["svm/java"]
     :dependencies
-    [[com.oracle.substratevm/svm "19.2.1" :scope "provided"]]}
+    [[org.graalvm.nativeimage/svm "24.2.2" :scope "provided"]]}
 
    :uberjar
    {:target-path "target/uberjar"
