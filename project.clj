@@ -11,7 +11,7 @@
   :pedantic? :abort
 
   :dependencies
-  [[org.clojure/clojure "1.12.2"]
+  [[org.clojure/clojure "1.11.4"]
    [org.clojure/data.json "2.5.1"]
    [org.clojure/tools.cli "1.1.230"]
    [org.clojure/tools.logging "1.3.0"]
@@ -40,7 +40,7 @@
    :coverage
    {:jvm-opts ["-DSOLANUM_LOG_APPENDER=nop"]
     :plugins
-    [[org.clojure/clojure "1.12.2"]
+    [[org.clojure/clojure "1.11.4"]
      [lein-cloverage "1.2.2"]]}
 
    :svm
