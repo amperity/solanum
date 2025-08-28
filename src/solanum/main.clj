@@ -139,7 +139,8 @@
         (println "Collected" (count events) "events")
         (writer/write-outputs (:outputs config) events)
         (when (pos? n)
-          (Thread/sleep (* 1000 (:test-delay options)))
+          ;; Coerce to long to avoid reflecting error in native executable
+          (Thread/sleep (long (* 1000 (:test-delay options))))
           (recur (dec n)))))))
 
 

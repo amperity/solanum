@@ -36,14 +36,28 @@ uberjar: $(uberjar_path)
 solanum: reflection-config := svm/reflection-config.json
 solanum: $(uberjar_path) $(reflection-config)
 	$(GRAAL_PATH)/bin/native-image \
-	    --allow-incomplete-classpath \
 	    --report-unsupported-elements-at-runtime \
-	    --delay-class-initialization-to-runtime=io.netty.handler.ssl.ConscryptAlpnSslEngine \
-	    --delay-class-initialization-to-runtime=io.netty.handler.ssl.ReferenceCountedOpenSslEngine \
-	    --delay-class-initialization-to-runtime=io.netty.util.internal.logging.Log4JLogger \
 	    -H:ReflectionConfigurationFiles=$(reflection-config) \
-	    -J-Xms3G -J-Xmx3G \
+		--initialize-at-run-time=io.netty.handler.ssl.ConscryptAlpnSslEngine \
+		--initialize-at-run-time=io.netty.handler.ssl.ReferenceCountedOpenSslEngine \
+		--initialize-at-run-time=io.netty.util.internal.logging.Log4JLogger \
+		--initialize-at-build-time=io.netty.buffer.PooledByteBufAllocator\$$PoolThreadLocalCache \
+		--initialize-at-build-time=io.netty.buffer \
+		--initialize-at-build-time=io.netty.buffer.PooledUnsafeDirectByteBuf\$$1 \
+		--initialize-at-build-time=io.netty.util.Recycler\$$3 \
+		--initialize-at-build-time=io.netty.util.Recycler\$$2 \
+		--initialize-at-build-time=io.netty.util.Recycler\$$1 \
+		--initialize-at-build-time=io.netty.util.ResourceLeakDetector \
+		--initialize-at-build-time=io.netty.util.internal.LongAdderCounter \
+		--initialize-at-build-time=ch.qos.logback \
+		--initialize-at-build-time=ch.qos.logback.classic.Logger \
+		--initialize-at-build-time=io.netty.util.ResourceLeakDetector\$$Level \
+		--initialize-at-build-time=io.netty.util.internal.logging.Slf4JLogger \
+		--features=clj_easy.graal_build_time.InitClojureClasses \
 	    --no-server \
+		--diagnostics-mode \
+		-J-Xms3G -J-Xmx3G \
+		-H:+ReportExceptionStackTraces \
 	    -jar $<
 
 dist/$(release_name).tar.gz: solanum

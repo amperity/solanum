@@ -11,7 +11,7 @@
   :pedantic? :abort
 
   :dependencies
-  [[org.clojure/clojure "1.11.4"]
+  [[org.clojure/clojure "1.12.2"]
    [org.clojure/data.json "2.5.1"]
    [org.clojure/tools.cli "1.1.230"]
    [org.clojure/tools.logging "1.3.0"]
@@ -40,13 +40,15 @@
    :coverage
    {:jvm-opts ["-DSOLANUM_LOG_APPENDER=nop"]
     :plugins
-    [[org.clojure/clojure "1.11.4"]
+    [[org.clojure/clojure "1.12.2"]
      [lein-cloverage "1.2.2"]]}
+
+   :provided
+   {:dependencies [[org.graalvm.nativeimage/svm "24.2.2"]]}
 
    :svm
    {:java-source-paths ["svm/java"]
-    :dependencies
-    [[org.graalvm.nativeimage/svm "24.2.2" :scope "provided"]]}
+    :dependencies [[com.github.clj-easy/graal-build-time "1.0.5"]]}
 
    :uberjar
    {:target-path "target/uberjar"
