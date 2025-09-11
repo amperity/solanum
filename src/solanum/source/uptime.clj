@@ -24,15 +24,13 @@
 (defn- measure-darwin-uptime
   "Measure the number of seconds the OS X system has been running."
   []
-  (let [result (shell/sh "uptime")]
+  (let [result (shell/sh "sysctl" "-n" "kern.boottime")]
     (if (zero? (:exit result))
-      (let [[days hours minutes] (->> (:out result)
-                                      (re-seq #"up (\d+) days, +(\d+):(\d+),")
-                                      (first)
-                                      (rest))]
-        (+ (* 86400 (Long/parseLong days))
-           (*  3600 (Long/parseLong hours))
-           (*    60 (Long/parseLong minutes))))
+      (let [[_ boot-timestamp] (->> (:out result)
+                                    (re-seq #"sec = (\d+),")
+                                    (first))
+            current-timestamp (quot (System/currentTimeMillis) 1000)]
+        (- current-timestamp (Long/parseLong boot-timestamp)))
       (log/warn "Failed to measure uptime:" (pr-str (:err result))))))
 
 

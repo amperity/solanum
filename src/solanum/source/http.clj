@@ -15,15 +15,16 @@
   "Return a parsed response body if the content type is advertized as a known
   data format. Returns nil otherwise."
   [response]
-  (let [content-type (get-in response [:headers "content-type"])]
-    (cond
-      (str/starts-with? content-type "application/edn")
-      (edn/read-string (:body response))
+  (let [content-type (get-in response [:headers :content-type])]
+    (-> (cond
+          (str/starts-with? content-type "application/edn")
+          (edn/read-string (:body response))
 
-      (str/starts-with? content-type "application/json")
-      (json/read-str (:body response))
+          (str/starts-with? content-type "application/json")
+          (json/read-str (:body response))
 
-      :else nil)))
+          :else nil)
+        (update-keys str))))
 
 
 (defn- acceptable-values
@@ -72,7 +73,7 @@
                          (pr-str value)
                          (str/join "/" (sort acceptable)))]))
       [false (format "Body content %s is not parseable for data check"
-                     (get-in response [:headers "content-type"]))])
+                     (get-in response [:headers :content-type]))])
 
     ;; else
     (log/error "Unknown HTTP response check type" (pr-str (:type check)))))
@@ -110,7 +111,8 @@
                       {:url url
                        :method :get
                        :connect-timeout 1000
-                       :idle-timeout timeout})]
+                       :idle-timeout timeout
+                       :as :text})]
           [{:service "http url time"
             :label (or label url)
             :metric @elapsed}
