@@ -110,7 +110,7 @@ jobs:
           command: curl -o /usr/local/bin/lein https://codeberg.org/leiningen/leiningen/raw/tag/2.12.0/bin/lein && chmod +x /usr/local/bin/lein
       - run:
           name: Build native executable
-          command: GRAAL_PATH="/opt/graalvm-community-java25/" make solanum
+          command: GRAAL_PATH="/usr/java" make solanum
 
 
 
