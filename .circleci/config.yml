@@ -9,7 +9,7 @@ executors:
   build:
     docker:
       - image: ghcr.io/graalvm/native-image-community:25
-    resource_class: arm.medium
+    resource_class: arm.large
     working_directory: ~/repo
 
 
@@ -111,6 +111,8 @@ jobs:
       - run:
           name: Build native executable
           command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
+      - store_artifacts:
+          path: ~/repo/solanum
 
 
 
