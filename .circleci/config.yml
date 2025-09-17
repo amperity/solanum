@@ -122,3 +122,4 @@ workflows:
       - coverage:
           requires:
             - test
+      - build
