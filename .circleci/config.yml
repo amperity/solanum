@@ -4,7 +4,12 @@ version: 2.1
 executors:
   clojure:
     docker:
-      - image: circleci/clojure:openjdk-11-lein-2.9.1
+      - image: cimg/clojure:1.11.4-openjdk-17.0
+    working_directory: ~/repo
+  build:
+    docker:
+      - image: ghcr.io/graalvm/native-image-community:25
+    resource_class: arm.large
     working_directory: ~/repo
 
 
@@ -17,10 +22,10 @@ jobs:
       - run:
           name: Install cljstyle
           environment:
-            CLJSTYLE_VERSION: 0.15.0
+            CLJSTYLE_VERSION: 0.17.642
           command: |
-            wget https://github.com/greglook/cljstyle/releases/download/${CLJSTYLE_VERSION}/cljstyle_${CLJSTYLE_VERSION}_linux.zip
-            unzip cljstyle_${CLJSTYLE_VERSION}_linux.zip
+            wget https://github.com/greglook/cljstyle/releases/download/${CLJSTYLE_VERSION}/cljstyle_${CLJSTYLE_VERSION}_linux_amd64.zip
+            unzip cljstyle_${CLJSTYLE_VERSION}_linux_amd64.zip
       - run:
           name: Check source formatting
           command: "./cljstyle check --stats style-stats.tsv"
@@ -35,7 +40,7 @@ jobs:
       - run:
           name: Install clj-kondo
           environment:
-            CLJ_KONDO_VERSION: 2021.10.19
+            CLJ_KONDO_VERSION: 2025.07.28
           command: |
             wget https://github.com/borkdude/clj-kondo/releases/download/v${CLJ_KONDO_VERSION}/clj-kondo-${CLJ_KONDO_VERSION}-linux-amd64.zip
             unzip clj-kondo-${CLJ_KONDO_VERSION}-linux-amd64.zip
@@ -96,6 +101,20 @@ jobs:
           name: Publish Coverage
           command: './codecov -f target/coverage/codecov.json'
 
+  build:
+    executor: build
+    steps:
+      - checkout
+      - run:
+          name: Install lein
+          command: curl -o /usr/local/bin/lein https://codeberg.org/leiningen/leiningen/raw/tag/2.12.0/bin/lein && chmod +x /usr/local/bin/lein
+      - run:
+          name: Build native executable
+          command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
+      - store_artifacts:
+          path: ~/repo/solanum
+
+
 
 # Workflow definitions
 workflows:
@@ -108,3 +127,4 @@ workflows:
       - coverage:
           requires:
             - test
+      - build
