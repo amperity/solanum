@@ -64,7 +64,8 @@
             (comp
               (if (seq devices)
                 (filter (comp (set devices) key))
-                (filter #(re-matches #"(sd|xvd)[a-z]" (key %))))
+                (filter #(or (re-matches #"(sd|xvd)[a-z]" (key %))
+                             (re-matches #"nvme[0-9]+n1" (key %)))))
               (mapcat
                 (fn expand-events
                   [[device diffs]]
