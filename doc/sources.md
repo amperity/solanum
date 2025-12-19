@@ -71,7 +71,7 @@ spent on those operations, and overall IO activity.
 - `devices`
 
   A list of block devices to measure. By default the source will measure any
-  devices matching `sd[a-z]` or `xvd[a-z]`.
+  devices matching `sd[a-z]`, `xvd[a-z]`, or `nvme[0-9]+n1`.
 
 - `detailed`
 
