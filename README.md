@@ -1,7 +1,7 @@
 Solanum
 =======
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/amperity/solanum/tree/main.svg?style=shield](https://dl.circleci.com/status-badge/redirect/gh/amperity/solanum/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/amperity/solanum/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/amperity/solanum/tree/main)
 <img align="right" src="doc/logo.png">
 
 Solanum is a simple monitoring daemon which can be configured to collect
