@@ -118,7 +118,6 @@ jobs:
           command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
       - store_artifacts:
           path: ~/repo/solanum
-          destination: amd64
 
   build-arm64:
     executor: build-arm64
@@ -132,7 +131,6 @@ jobs:
           command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
       - store_artifacts:
           path: ~/repo/solanum
-          destination: arm64
 
 
 
