@@ -1,7 +1,7 @@
 Solanum
 =======
 
-[![CircleCI](https://circleci.com/gh/greglook/solanum.svg?style=shield&circle-token=c14a7265562fdec8881672070d87d812f076bf8a)](https://circleci.com/gh/greglook/solanum)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/amperity/solanum/tree/main.svg?style=shield](https://dl.circleci.com/status-badge/redirect/gh/amperity/solanum/tree/main)
 <img align="right" src="doc/logo.png">
 
 Solanum is a simple monitoring daemon which can be configured to collect
@@ -17,9 +17,14 @@ gem installs.
 
 ## Installation
 
-Releases are published on the [GitHub project](https://github.com/greglook/solanum/releases).
+Releases are published on the [GitHub project](https://github.com/amperity/solanum/releases).
 The native binaries are self-contained, so to install them simply place them on
 your path.
+
+
+## Development
+
+See the [developer docs](./doc/developer.md).
 
 
 ## Metric Events

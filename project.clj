@@ -1,6 +1,6 @@
-(defproject mvxcvi/solanum "3.2.4-SNAPSHOT"
+(defproject amperity/solanum "3.3.0-SNAPSHOT"
   :description "Local host monitoring daemon."
-  :url "https://github.com/greglook/solanum"
+  :url "https://github.com/amperity/solanum"
   :license {:name "Public Domain"
             :url "http://unlicense.org/"}
 
