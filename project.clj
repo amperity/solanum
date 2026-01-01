@@ -13,11 +13,11 @@
   :dependencies
   [[org.clojure/clojure "1.12.2"]
    [org.clojure/data.json "2.5.1"]
-   [org.clojure/tools.cli "1.1.230"]
-   [org.clojure/tools.logging "1.3.0"]
-   [ch.qos.logback/logback-classic "1.5.18"]
+   [org.clojure/tools.cli "1.3.250"]
+   [org.clojure/tools.logging "1.3.1"]
+   [ch.qos.logback/logback-classic "1.5.23"]
    [http-kit "2.8.1"]
-   [org.yaml/snakeyaml "2.4"]
+   [org.yaml/snakeyaml "2.5"]
    [riemann-clojure-client "0.5.4"]]
 
   :hiera
@@ -44,7 +44,7 @@
      [lein-cloverage "1.2.2"]]}
 
    :provided
-   {:dependencies [[org.graalvm.nativeimage/svm "24.2.2"]]}
+   {:dependencies [[org.graalvm.nativeimage/svm "25.0.1"]]}
 
    :svm
    {:java-source-paths ["svm/java"]
