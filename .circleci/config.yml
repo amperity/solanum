@@ -6,7 +6,12 @@ executors:
     docker:
       - image: cimg/clojure:1.11.4-openjdk-17.0
     working_directory: ~/repo
-  build:
+  build-amd64:
+    docker:
+      - image: ghcr.io/graalvm/native-image-community:25
+    resource_class: large
+    working_directory: ~/repo
+  build-arm64:
     docker:
       - image: ghcr.io/graalvm/native-image-community:25
     resource_class: arm.large
@@ -101,8 +106,8 @@ jobs:
           name: Publish Coverage
           command: './codecov -f target/coverage/codecov.json'
 
-  build:
-    executor: build
+  build-amd64:
+    executor: build-amd64
     steps:
       - checkout
       - run:
@@ -113,6 +118,21 @@ jobs:
           command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
       - store_artifacts:
           path: ~/repo/solanum
+          destination: amd64
+
+  build-arm64:
+    executor: build-arm64
+    steps:
+      - checkout
+      - run:
+          name: Install lein
+          command: curl -o /usr/local/bin/lein https://codeberg.org/leiningen/leiningen/raw/tag/2.12.0/bin/lein && chmod +x /usr/local/bin/lein
+      - run:
+          name: Build native executable
+          command: GRAAL_PATH="/usr/lib64/graalvm/graalvm-community-java25" make solanum
+      - store_artifacts:
+          path: ~/repo/solanum
+          destination: arm64
 
 
 
