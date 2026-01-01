@@ -71,6 +71,6 @@
 (defn stop!
   "Stop a running writer thread, waiting up to `timeout` milliseconds for it
   to terminate."
-  [^Thread thread timeout]
+  [^Thread thread ^Long timeout]
   (.interrupt thread)
   (.join thread timeout))
