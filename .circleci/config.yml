@@ -147,4 +147,5 @@ workflows:
       - coverage:
           requires:
             - test
-      - build
+      - build-amd64
+      - build-arm64
