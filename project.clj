@@ -1,4 +1,4 @@
-(defproject amperity/solanum "3.3.0-SNAPSHOT"
+(defproject amperity/solanum "1.0.0-SNAPSHOT"
   :description "Local host monitoring daemon."
   :url "https://github.com/amperity/solanum"
   :license {:name "Public Domain"
