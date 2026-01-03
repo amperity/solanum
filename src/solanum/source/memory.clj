@@ -25,11 +25,7 @@
                    lines)
         total (get info "MemTotal")]
     (when (and total (pos? total))
-      {:usage (double (/ (- total
-                            (get info "MemFree")
-                            (get info "Buffers")
-                            (get info "Cached"))
-                         total))
+      {:usage (double (- 1 (/ (get info "MemAvailable") total)))
        :buffers (double (/ (get info "Buffers") total))
        :cached (double (/ (+ (get info "Cached")
                              (get info "SReclaimable")
