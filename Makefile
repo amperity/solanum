@@ -32,7 +32,6 @@ uberjar: $(uberjar_path)
 
 # TODO: further options
 # --static
-# --enable-url-protocols=http,https
 solanum: reflection-config := svm/reflection-config.json
 solanum: $(uberjar_path) $(reflection-config)
 	$(GRAAL_PATH)/bin/native-image \
@@ -70,6 +69,7 @@ solanum: $(uberjar_path) $(reflection-config)
 		--initialize-at-build-time=io.netty.util.internal.logging.Slf4JLogger \
 		--features=clj_easy.graal_build_time.InitClojureClasses \
 	    --no-server \
+	  --enable-url-protocols=http,https \
 		-J-Xms3G -J-Xmx3G \
 		-H:+ReportExceptionStackTraces \
 	    -jar $<
